@@ -10,7 +10,14 @@ public class trap : MonoBehaviour
         {
             Debug.Log("collision with trap");
             collision.gameObject.GetComponent<Player>().lives --;
-            UI.ChangeLives(collision.gameObject.GetComponent<Player>().lives);
+            if (collision.gameObject.GetComponent<Player>().lives == 0)
+            {
+                _GLOBAL.LoadScene(0);
+            }
+            else
+            {
+                UI.ChangeLives(collision.gameObject.GetComponent<Player>().lives);
+            }
         }
     }
 }
