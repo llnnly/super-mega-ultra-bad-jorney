@@ -66,7 +66,6 @@ public class Player : MonoBehaviour
     private void Jump()
     {
         rb.AddForce(transform.up * jump, ForceMode2D.Impulse);
-        lives -= 1;
     }
 
     private void CheckGround()
