@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
 
     private void OffInvulnerability(object source, System.Timers.ElapsedEventArgs e)
     {
-        Debug.Log("OffInvulnerability");
         aTimer.Enabled = false;
         invulnerability = false;
     }
