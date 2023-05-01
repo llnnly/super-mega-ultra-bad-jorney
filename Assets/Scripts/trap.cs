@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class trap : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("collision with trap");
-            collision.gameObject.GetComponent<Player>().lives --;
-            if (collision.gameObject.GetComponent<Player>().lives == 0)
-            {
+            Player pl = collision.gameObject.GetComponent<Player>();
+            //Debug.Log("collision with trap");
+            pl.lives --;
+            pl.Invulnerability = true;
+            if (pl.lives <= 0)
                 _GLOBAL.LoadScene(0);
-            }
             else
-            {
-                UI.ChangeLives(collision.gameObject.GetComponent<Player>().lives);
-            }
+                UI.ChangeLives(pl.lives);
         }
+        //Debug.Log("collision with trap");
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Timers;
 
 public class Player : MonoBehaviour
 {
@@ -10,21 +11,42 @@ public class Player : MonoBehaviour
     [SerializeField] private float jump = 15f;// прыжок
     private bool isGrounded = false;
 
+    private bool invulnerability = false;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
     //private Animator anim;
 
-
+    private static Timer aTimer = new System.Timers.Timer();
     private int _lives = 3; // жизни
     [SerializeField] private Text _livesLabel;
+
+    public bool Invulnerability
+    {
+        get { return invulnerability; }
+        set
+        {
+            if (value && !aTimer.Enabled)
+                aTimer.Enabled = true;
+            invulnerability = value;
+        }
+    }
+
+    private void OffInvulnerability(object source, System.Timers.ElapsedEventArgs e)
+    {
+        Debug.Log("OffInvulnerability");
+        aTimer.Enabled = false;
+        invulnerability = false;
+    }
 
     public int lives
     {
         get { return _lives; }
         set
         {
-            if (value >= 0 && value <= 3)
+
+            if (value >= 0 && value <= 3 && !invulnerability)
             {
+                Debug.Log(value + " \"" + invulnerability + "\"");
                 _lives = value;
             }
         }
@@ -35,6 +57,9 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        aTimer.AutoReset = true;
+        aTimer.Interval = 500;
+        aTimer.Elapsed += OffInvulnerability;
     }
 
     private void FixedUpdate()
