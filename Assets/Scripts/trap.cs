@@ -9,6 +9,7 @@ public class trap : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             collision.gameObject.GetComponent<Player>().lives --;
+            Debug.Log(collision.gameObject.GetComponent<Player>().lives);
         }
     }
 }
