@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 
 public class HeadEnemy : MonoBehaviour
@@ -27,6 +28,8 @@ public class HeadEnemy : MonoBehaviour
             bullet.transform.position = enemySprite.transform.position;
             shootPos = playerSprite.transform.position;
             bulletStartPos = bullet.transform.position;
+            float angle = (Mathf.Atan(shootPos.x - bulletStartPos.x) / (shootPos.y - bulletStartPos.y)) / Mathf.PI * 180;
+            bullet.transform.Rotate(0f, 0f, -90 - angle);
         }
     }
 
@@ -46,7 +49,9 @@ public class HeadEnemy : MonoBehaviour
         playerPos = playerSprite.transform.position;
         playerPos.y += 3f;
 
+        enemySprite.flipX = playerPos.x < enemySprite.transform.position.x;
         enemySprite.transform.position = Vector3.MoveTowards(enemyPos, playerPos, 4f * Time.deltaTime);
+        
     }
 
     void FixedUpdate()
