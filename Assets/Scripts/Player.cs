@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
             if (value >= 0 && value <= 3)
             {
                 _lives = value;
-                _livesLabel.text = _lives.ToString() + " жизни";
             }
         }
     }

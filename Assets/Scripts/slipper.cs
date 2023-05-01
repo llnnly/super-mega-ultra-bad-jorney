@@ -8,7 +8,8 @@ public class slipper : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("dsfskjfljs");
+            collision.gameObject.GetComponent<Player>().lives = 3;
+            _GLOBAL.LoadScene(0);
         }
     }
 }
