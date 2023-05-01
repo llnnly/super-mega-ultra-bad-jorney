@@ -110,13 +110,15 @@ public class Test : MonoBehaviour
 
     public void NextQuestion()
     {
+        string numBtn = EventSystem.current.currentSelectedGameObject.name + "";
+
+        //Debug.Log(rightanswArray[numberQuestion] + " " + numBtn);
+
+        if (rightanswArray[numberQuestion] == numBtn)
+            countRightAnsw += 1;
+
         if (numberQuestion < 4)
         {
-            string numBtn = EventSystem.current.currentSelectedGameObject.name + "";
-
-            if (rightanswArray[numberQuestion] == numBtn)
-                countRightAnsw += 1;
-
             numberQuestion += 1;
 
             //Debug.Log(countRightAnsw);
@@ -130,12 +132,12 @@ public class Test : MonoBehaviour
         testCanvas.gameObject.SetActive(false);
         windowCanvas.gameObject.SetActive(true);
 
-        if (countRightAnsw+1 > 3)
+        if (countRightAnsw == 5)
         {
 
             //Debug.Log("Молодец");
             congratsText.text = "WOW! congratulations!";
-            correctAnsw.text = countRightAnsw+1 + "/5";
+            correctAnsw.text = countRightAnsw + "/5";
             againText.text = "Continue"; //переход на игру надо
         }
 
@@ -143,7 +145,7 @@ public class Test : MonoBehaviour
         {
             //Debug.Log("Ха, лох");
             congratsText.text = "Ha! You don't understand lore of this game!";
-            correctAnsw.text = countRightAnsw+1 + "/5";
+            correctAnsw.text = countRightAnsw + "/5";
             againText.text = "Again";//переход на начало катсцены надо
         }
     }
