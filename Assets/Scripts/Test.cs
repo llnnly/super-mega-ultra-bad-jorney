@@ -71,9 +71,12 @@ public class Test : MonoBehaviour
     public TMP_Text correctAnsw;
     public TMP_Text againText;
 
+    public bool IsWin;
+
 
     void Start()
     {
+        IsWin = false;
 
         testCanvas.gameObject.SetActive(true);
         windowCanvas.gameObject.SetActive(false);
@@ -138,7 +141,8 @@ public class Test : MonoBehaviour
             //Debug.Log("Молодец");
             congratsText.text = "WOW! congratulations!";
             correctAnsw.text = countRightAnsw + "/5";
-            againText.text = "Continue"; //переход на игру надо
+            againText.text = "Continue";
+            IsWin = true;
         }
 
         else
@@ -146,8 +150,23 @@ public class Test : MonoBehaviour
             //Debug.Log("Ха, лох");
             congratsText.text = "Ha! You don't understand lore of this game!";
             correctAnsw.text = countRightAnsw + "/5";
-            againText.text = "Again";//переход на начало катсцены надо
+            againText.text = "Again";
         }
+    }
+
+    public void NextScene()
+    {
+        if (IsWin)
+        {
+            //переход на игру
+            Debug.Log("Молодец");
+        }
+        else
+        {
+            Debug.Log("Ха, лох");
+            //переход на катсцену
+        }
+
     }
 
 }
