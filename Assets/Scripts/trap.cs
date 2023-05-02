@@ -9,7 +9,6 @@ public class trap : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Player pl = collision.gameObject.GetComponent<Player>();
-            Debug.Log("collision with trap");
             pl.lives --;
             pl.Invulnerability = true;
             if (pl.lives <= 0)
@@ -17,6 +16,5 @@ public class trap : MonoBehaviour
             else
                 UI.ChangeLives(pl.lives);
         }
-        //Debug.Log("collision with trap");
     }
 }

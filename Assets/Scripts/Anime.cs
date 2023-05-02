@@ -132,6 +132,8 @@ public class Anime : MonoBehaviour
     public Image girlie;
     int countPhrase = 0;
 
+    //private GameObject girlieObj;
+
     public Sprite girlie_happy;
     public Sprite girlie_calm;
     public Sprite girlie_angry;
@@ -161,5 +163,6 @@ public class Anime : MonoBehaviour
             //Переход на сцену с РикРолом
         }
     }
+
 
 }

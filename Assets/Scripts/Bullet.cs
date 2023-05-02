@@ -6,8 +6,14 @@ public class Bullet : MonoBehaviour
 {
     private void DecreaseLive(Collision2D collision)
     {
-        collision.gameObject.GetComponent<Player>().lives--;
-        UI.ChangeLives(collision.gameObject.GetComponent<Player>().lives);
+        Player player = collision.gameObject.GetComponent<Player>();
+        player.lives--;
+        UI.ChangeLives(player.lives);
+        if (player.lives <= 0)
+        {
+            player.lives = 3;
+            _GLOBAL.LoadScene(0);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

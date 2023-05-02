@@ -20,6 +20,8 @@ public class HeadEnemy : MonoBehaviour
     private Vector3 shootPos;
     private Vector3 bulletStartPos;
 
+    private GameObject sound;
+
     private IEnumerator Fire()
     {
         if (Mathf.Abs(playerSprite.transform.position.x - enemySprite.transform.position.x) < 10f)
@@ -35,6 +37,7 @@ public class HeadEnemy : MonoBehaviour
                 bulletStartPos = bullet.transform.position;
                 float angle = (Mathf.Atan(shootPos.x - bulletStartPos.x) / (shootPos.y - bulletStartPos.y)) / Mathf.PI * 180;
                 bullet.transform.Rotate(0f, 0f, -90 - angle);
+                sound.GetComponent<AudioSource>().Play();
             }
         }
     }
@@ -47,6 +50,7 @@ public class HeadEnemy : MonoBehaviour
 
     void Start()
     {
+        sound = transform.Find("AudioSource").gameObject;
         StartCoroutine(Fire());
     }
 
@@ -73,7 +77,7 @@ public class HeadEnemy : MonoBehaviour
                 shootPos + new Vector3(shootPos.x - bulletStartPos.x, shootPos.y - bulletStartPos.y, 0f) * 4,
                 10f * Time.deltaTime);
         }
-        
+
     }
 
     //public enum States

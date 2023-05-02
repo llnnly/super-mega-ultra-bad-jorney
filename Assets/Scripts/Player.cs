@@ -16,8 +16,11 @@ public class Player : MonoBehaviour
     private SpriteRenderer sprite;
     private Collider2D plr;
     private Animator anim;
+    public bool stopped = false;
 
     private static Timer aTimer = new System.Timers.Timer();
+    private GameObject jumpSound;
+
     private int _lives = 3; // жизни
     [SerializeField] private Text _livesLabel;
 
@@ -66,6 +69,11 @@ public class Player : MonoBehaviour
         aTimer.Elapsed += OffInvulnerability;
     }
 
+    private void Start()
+    {
+        jumpSound = transform.Find("jump").gameObject;
+    }
+
     private void FixedUpdate()
     {
         CheckGround();
@@ -74,34 +82,39 @@ public class Player : MonoBehaviour
     private void Update()
     {
         //if (isGrounded) State = States.idle;
+        if (!stopped)
+        {
 
-        if (Input.GetButton("Horizontal"))
-        {
-            Run();
-            anim.SetBool("Staying", false);
-        }
-        else
-            anim.SetBool("Run", false);
+            if (Input.GetButton("Horizontal"))
+            {
+                Run();
+                anim.SetBool("Staying", false);
+            }
+            else
+                anim.SetBool("Run", false);
 
-        if (isGrounded && Input.GetButtonDown("Jump"))
-        {
-            anim.SetTrigger("Jump");
-            Jump();
-        }
+            if (isGrounded && Input.GetButtonDown("Jump"))
+            {
+                anim.SetTrigger("Jump");
+                Jump();
+                jumpSound.GetComponent<AudioSource>().Play();
+            }
 
-        if (!isGrounded)
-        {
-            anim.SetBool("Falling", true);
-            anim.SetBool("Run", false);
-            anim.SetBool("Staying", false);
-        } else
-        {
-            anim.SetBool("Falling", false);
-        }
+            if (!isGrounded)
+            {
+                anim.SetBool("Falling", true);
+                anim.SetBool("Run", false);
+                anim.SetBool("Staying", false);
+            }
+            else
+            {
+                anim.SetBool("Falling", false);
+            }
 
-        if (isGrounded && !Input.GetButton("Horizontal") && !Input.GetButtonDown("Jump"))
-        {
-            anim.SetBool("Staying", true);
+            if (isGrounded && !Input.GetButton("Horizontal") && !Input.GetButtonDown("Jump"))
+            {
+                anim.SetBool("Staying", true);
+            }
         }
     }
 
