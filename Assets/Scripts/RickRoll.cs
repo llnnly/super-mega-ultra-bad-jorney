@@ -27,6 +27,6 @@ public class RickRoll : MonoBehaviour
     public void ClickOnExit()
     {
         videoPlayer.Pause();
-        //и переход на главное меню
+        _GLOBAL.LoadScene(0);
     }
 }

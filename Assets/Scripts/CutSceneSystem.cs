@@ -101,6 +101,9 @@ public class CutSceneSystem : MonoBehaviour
                                         {
                                             background.sprite = sprite1;
                                             text.sprite = textbg1;
+                                        } else
+                                        {
+                                            _GLOBAL.LoadScene(2);
                                         }
                                     }
                                 }
