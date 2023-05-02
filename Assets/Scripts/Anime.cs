@@ -130,7 +130,7 @@ public class Anime : MonoBehaviour
 
     public TMP_Text text;
     public Image girlie;
-    int countPhrase = 0;
+    public int countPhrase = 0;
 
     //private GameObject girlieObj;
 
@@ -144,7 +144,7 @@ public class Anime : MonoBehaviour
         text.text = Phrases[countPhrase];
     }
 
-    public void ClickOn()
+    public void Change()
     {
         if (countPhrase < Phrases.Length-1)
         {

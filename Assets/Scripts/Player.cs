@@ -63,7 +63,6 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         plr = GetComponent<Collider2D>();
-        print(plr.name);
         aTimer.AutoReset = true;
         aTimer.Interval = 500;
         aTimer.Elapsed += OffInvulnerability;
@@ -138,7 +137,6 @@ public class Player : MonoBehaviour
     private void CheckGround()
     {
         Collider2D[] collider = Physics2D.OverlapBoxAll(transform.position, plr.bounds.size, 0f);
-        print(plr.bounds.size);
         isGrounded = collider.Length > 1;
     }
 }
