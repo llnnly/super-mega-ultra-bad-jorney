@@ -159,12 +159,12 @@ public class Test : MonoBehaviour
         if (IsWin)
         {
             //переход на игру
-            Debug.Log("Молодец");
+            _GLOBAL.LoadScene(3);
         }
         else
         {
-            Debug.Log("Ха, лох");
             //переход на катсцену
+            _GLOBAL.LoadScene(1);
         }
 
     }
