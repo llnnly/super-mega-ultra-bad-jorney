@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         plr = GetComponent<Collider2D>();
+        print(plr.name);
         aTimer.AutoReset = true;
         aTimer.Interval = 500;
         aTimer.Elapsed += OffInvulnerability;
