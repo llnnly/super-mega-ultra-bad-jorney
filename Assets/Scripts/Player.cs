@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     private bool invulnerability = false;
     private Rigidbody2D rb;
     private SpriteRenderer sprite;
-    //private Animator anim;
+    private Collider2D plr;
+    private Animator anim;
 
     private static Timer aTimer = new System.Timers.Timer();
     private int _lives = 3; // жизни
@@ -45,6 +46,8 @@ public class Player : MonoBehaviour
 
             if (value >= 0 && value <= 3 && !invulnerability)
             {
+                if (value < _lives)
+                    anim.SetTrigger("Getting Damage");
                 Debug.Log(value + " \"" + invulnerability + "\"");
                 _lives = value;
             }
@@ -54,8 +57,9 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        //anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
+        plr = GetComponent<Collider2D>();
         aTimer.AutoReset = true;
         aTimer.Interval = 500;
         aTimer.Elapsed += OffInvulnerability;
@@ -71,14 +75,39 @@ public class Player : MonoBehaviour
         //if (isGrounded) State = States.idle;
 
         if (Input.GetButton("Horizontal"))
+        {
             Run();
+            anim.SetBool("Staying", false);
+        }
+        else
+            anim.SetBool("Run", false);
+
         if (isGrounded && Input.GetButtonDown("Jump"))
+        {
+            anim.SetTrigger("Jump");
             Jump();
+        }
+
+        if (!isGrounded)
+        {
+            anim.SetBool("Falling", true);
+            anim.SetBool("Run", false);
+            anim.SetBool("Staying", false);
+        } else
+        {
+            anim.SetBool("Falling", false);
+        }
+
+        if (isGrounded && !Input.GetButton("Horizontal") && !Input.GetButtonDown("Jump"))
+        {
+            anim.SetBool("Staying", true);
+        }
     }
 
     private void Run()
     {
-        //if (isGrounded) State = States.run;
+        if (isGrounded)
+            anim.SetBool("Run", true);
 
         Vector3 dir = transform.right * Input.GetAxis("Horizontal");
 
@@ -94,19 +123,8 @@ public class Player : MonoBehaviour
 
     private void CheckGround()
     {
-        Collider2D[] collider = Physics2D.OverlapBoxAll(transform.position, sprite.size, 0f);
+        Collider2D[] collider = Physics2D.OverlapBoxAll(transform.position, plr.bounds.size, 0f);
+        print(plr.bounds.size);
         isGrounded = collider.Length > 1;
     }
-
-    /*public enum States
-    {
-        idle,
-        run
-    }
-
-    private States State
-    {
-        get { return (States)anim.GetInteger("state"); }
-        set { anim.SetInteger("state", (int)value); }
-    }*/
 }
