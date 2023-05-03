@@ -19,6 +19,6 @@ public class MenuButtons : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        _GLOBAL.LoadScene(1);
     }
 }

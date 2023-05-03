@@ -9,11 +9,11 @@ using System;
 public class Test : MonoBehaviour
 {
     //Мне короче, было лень с файлами разбираться, поэтому все сразу тут описала
-    string[] qstArray = {  "What is the name of the main character?",
-                           "Who stole the samurai blade?",
-                           "Who used to own the blade?",
-                           "How many oceans will a samurai cross, according to the cutscene?",
-                           "What does our samurai want to do?"
+    string[] qstArray = {  "Как зовут главного героя?",
+                           "Кто украл клинок самуря?",
+                           "Кому раньше принадлежал клинок?",
+                           "Сколько океанов самурай пересечет, если верить катсцене?",
+                           "Что хочет совершить наш самурай?"
                         };
 
     string[] answArray1 = { "影",
@@ -23,17 +23,17 @@ public class Test : MonoBehaviour
                           };
 
     string[] answArray2 = { 
-                            "Dog",
-                            "Fox",
-                            "Hamster",
-                            "Squirrel"
+                            "Собака",
+                            "Лиса",
+                            "Хомяк",
+                            "Белка"
                           };
 
     string[] answArray3 = { 
-                            "great-great-great-great-great-great-great-grandfather",
-                            "great-great-great-great-great-great-great-great-grandfather",
-                            "great-great-great-great-great-great-great-great-great-grandfather",
-                            "great-great-great-great-great-great-great-great-great-great-great-grandfather"
+                            "пра-пра-пра-пра-пра-пра-пра-прадедушке",
+                            "пра-пра-пра-пра-пра-пра-пра-пра-прадедушке",
+                            "пра-пра-пра-пра-пра-пра-пра-пра-пра-прадедушке",
+                            "пра-пра-пра-пра-пра-пра-пра-пра-пра-пра-пра-прадедушке"
                           };
 
     string[] answArray4 = { "1",
