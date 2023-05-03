@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     private bool invulnerability = false;
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider2d;
     private SpriteRenderer sprite;
     private Collider2D plr;
     private Animator anim;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
 
     private int _lives = 3; // жизни
     [SerializeField] private Text _livesLabel;
+    [SerializeField] private LayerMask platfAndFloorLayers;
 
     public bool Invulnerability
     {
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         plr = GetComponent<Collider2D>();
+        boxCollider2d = GetComponent<BoxCollider2D>();
         print(plr.name);
         aTimer.AutoReset = true;
         aTimer.Interval = 500;
@@ -84,7 +87,6 @@ public class Player : MonoBehaviour
         //if (isGrounded) State = States.idle;
         if (!stopped)
         {
-
             if (Input.GetButton("Horizontal"))
             {
                 Run();
@@ -138,7 +140,6 @@ public class Player : MonoBehaviour
     private void CheckGround()
     {
         Collider2D[] collider = Physics2D.OverlapBoxAll(transform.position, plr.bounds.size, 0f);
-        print(plr.bounds.size);
         isGrounded = collider.Length > 1;
     }
 }

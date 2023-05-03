@@ -24,11 +24,12 @@ public class HeadEnemy : MonoBehaviour
 
     private IEnumerator Fire()
     {
-        if (Mathf.Abs(playerSprite.transform.position.x - enemySprite.transform.position.x) < 10f)
+        print("Fire!");
+        while (true)
         {
-            while (true)
+            yield return new WaitForSeconds(3); //wait 3 seconds
+            if (Mathf.Abs(playerSprite.transform.position.x - enemySprite.transform.position.x) < 10f)
             {
-                yield return new WaitForSeconds(3); //wait 3 seconds
                 Destroy(bullet);
                 anim.SetTrigger("Fire");
                 bullet = Instantiate(bulletSprite);
@@ -37,7 +38,7 @@ public class HeadEnemy : MonoBehaviour
                 bulletStartPos = bullet.transform.position;
                 float angle = (Mathf.Atan(shootPos.x - bulletStartPos.x) / (shootPos.y - bulletStartPos.y)) / Mathf.PI * 180;
                 bullet.transform.Rotate(0f, 0f, -90 - angle);
-                sound.GetComponent<AudioSource>().Play();
+                // sound.GetComponent<AudioSource>().Play();
             }
         }
     }
@@ -50,7 +51,7 @@ public class HeadEnemy : MonoBehaviour
 
     void Start()
     {
-        sound = transform.Find("AudioSource").gameObject;
+        // sound = transform.Find("AudioSource").gameObject;
         StartCoroutine(Fire());
     }
 
@@ -58,7 +59,7 @@ public class HeadEnemy : MonoBehaviour
     {   
         enemyPos = enemySprite.transform.position;
         playerPos = playerSprite.transform.position;
-        playerPos.y += 3f;
+        playerPos.y += 4f;
 
         if (Mathf.Abs(playerPos.x - enemyPos.x) < 10f)
         {
